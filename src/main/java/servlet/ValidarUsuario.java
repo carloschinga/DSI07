@@ -33,15 +33,14 @@ public class ValidarUsuario extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Alianza Lima</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Alianza Lima " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            String usuario=request.getParameter("usuario");
+            String clave=request.getParameter("clave");
+            if(usuario.equals("kike") && clave.equals("1234")){
+                out.print("Validó correctamente");
+            }
+            else{
+                out.print("Credenciales incorrectos");
+            }
         }
     }
 

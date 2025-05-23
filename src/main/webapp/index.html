@@ -1,23 +1,50 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Start Page</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <h1>Inicio de sesion</h1>
-        <form method="get" name="frmInicio" action="validarusuario">
-            <input type="text" name="txtUsuario">
+        <div id="divInicio">
+            <input type="text" id="txtUsuario">
             <br>
-            <input type="password" name="txtClave">
+            <input type="password" id="txtClave">
             <br>
-            <input type="submit" value="Enviar" >
+            <button id="btnIniciar">Iniciar</button>
+        </div>
+        <div id="divResultado"></div>
+        <script>
+            document.getElementById('btnIniciar').addEventListener('click', function () {
+                const usuario = document.getElementById('txtUsuario').value.trim();
+                const clave = document.getElementById('txtClave').value.trim();
+                const resultadoDiv = document.getElementById('divResultado');
 
-                
-                
-        </form>
-        
-       
+                if (!usuario || !clave) {
+                    resultadoDiv.textContent = 'Por favor, complete ambos campos.';
+                    resultadoDiv.style.color = 'red';
+                    return;
+                }
+
+                // Construir URL con parámetros codificados para GET
+                const url = `validarusuario?usuario=${encodeURIComponent(usuario)}&clave=${encodeURIComponent(clave)}`;
+
+                fetch(url, {
+                    method: 'GET'
+                }).then(response => response.text())
+                  .then(data => {
+                            resultadoDiv.textContent = data;
+                            resultadoDiv.style.color = 'green';
+                        })
+                  .catch(error => {
+                            resultadoDiv.textContent = 'Error en la conexión o servidor.';
+                            resultadoDiv.style.color = 'red';
+                            console.error('Error:', error);
+                        });
+            });
+        </script>
+
+
     </body>
-    <script></script>
 </html>
