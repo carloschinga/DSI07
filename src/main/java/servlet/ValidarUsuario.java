@@ -36,10 +36,10 @@ public class ValidarUsuario extends HttpServlet {
             String usuario=request.getParameter("usuario");
             String clave=request.getParameter("clave");
             if(usuario.equals("kike") && clave.equals("1234")){
-                out.print("Validó correctamente");
+                out.print("{\"resultado\":\"ok\",\"mensaje\":\"OK\" }");
             }
             else{
-                out.print("Credenciales incorrectos");
+                out.print("{\"resultado\":\"Error\",\"mensaje\":\"Error\" }");
             }
         }
     }

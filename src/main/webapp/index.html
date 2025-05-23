@@ -34,8 +34,14 @@
                     method: 'GET'
                 }).then(response => response.text())
                   .then(data => {
-                            resultadoDiv.textContent = data;
-                            resultadoDiv.style.color = 'green';
+                            let obj=JSON.parse(data);   
+                            if(obj.resultado==="ok"){
+                                resultadoDiv.textContent = obj.mensaje;
+                                resultadoDiv.style.color = 'green';
+                            }else{
+                                resultadoDiv.textContent = obj.mensaje;
+                                resultadoDiv.style.color = 'red';                                
+                            }
                         })
                   .catch(error => {
                             resultadoDiv.textContent = 'Error en la conexión o servidor.';
